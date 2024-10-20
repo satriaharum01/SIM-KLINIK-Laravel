@@ -32,7 +32,7 @@ class CustomAuth extends Controller
                         ->withSuccess('Signed in');
         }
 
-        return redirect("login")->withErrors(['email' => 'Email atau Password Salah']);
+        return redirect(route('login'))->withErrors(['alertMessage' => 'Email atau Password Salah']);
     }
 
     public function set_password(Request $request)

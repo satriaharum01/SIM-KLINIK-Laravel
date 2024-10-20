@@ -1,31 +1,18 @@
-
-    
-    
-    <!-- Custom template | don't include it in your project! -->
-
- 
-  <!--   Core JS Files   -->
-  <script src="{{asset('assets/js/core/jquery.3.2.1.min.js')}}"></script>
-  <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
-  <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
-  <!-- jQuery UI -->
-  <script src="{{asset('assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
-  <script src="{{asset('assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js')}}"></script>
   <!-- jQuery Toastr -->
-  <script src="<?= asset('assets/js/toastr.js') ?>"></script>
-  <!-- jQuery Scrollbar -->
-  <script src="{{asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
-  <!-- Datatables -->
-  <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
-  <!-- Page level plugins -->
-  <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+  <script src="<?= asset('static/assets/js/toastr.js') ?>"></script>
+  <!-- Essential javascripts for application to work-->
+  <script src="{{asset('static/js/jquery-3.7.0.min.js')}}"></script>
+  <script src="{{asset('static/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('static/js/main.js')}}"></script>
+  <!-- Page specific javascripts-->
+  <link  rel="stylesheet"  href="{{asset('static/css/datatables.min.css')}}"/>
+  <!-- Data table plugin-->
+  <script type="text/javascript" src="{{asset('static/js/plugins/jquery.dataTables.min.js')}}"></script>
   <!-- Select 2 Plugin -->
-  <script src="{{asset('assets/select2/select2.min.js')}}"></script>
-  <!-- Atlantis JS -->
-  <script src="{{asset('assets/js/atlantis.min.js')}}"></script>
-  <!-- Atlantis DEMO methods, don't include it in your project! -->
-  <script src="{{asset('assets/js/setting-demo2.js')}}"></script>
+  <script src="{{asset('static/assets/select2/select2.min.js')}}"></script>
+  <!-- Money Format plugins -->
+  <script src="{{asset('static/assets/js/chart.js/chart.js')}}"></script>
+  <script src="{{asset('static/assets/js/dashboard-chart-area.js')}}"></script>
   <script type="text/javascript">
     @if (session('message'))
         <?php switch (session('info')) {
@@ -100,9 +87,9 @@
   </script>
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- Page level plugins -->
-    <script src="{{asset('assets/js/chart.js/Chart.min.js')}}"></script>
+    <script src="{{asset('static/assets/js/chart.js/Chart.min.js')}}"></script>
     <!-- Money Format plugins -->
-    <script src="{{asset('assets/js/dashboard-chart-area.js')}}"></script>
+    <script src="{{asset('static/assets/js/dashboard-chart-area.js')}}"></script>
     <script>
         $(function () {
         $(".alert").fadeOut(3000);
@@ -134,9 +121,6 @@
 
         })
         
-        $("body").on("click",".btn-logs",function(){
-            window.location.href = "{{route('admin.logs')}}";
-        });
     </script>
   
   @if(Auth::user()->level == 'Admin')

@@ -1,34 +1,50 @@
 @extends('auth.app')
 
 @section('content')
-<div class="login-content">
-	<form action="<?= route('custom.login') ?>" method="POST" autocomplete="off">
-        @csrf
-	    <h2 class="title">Login</h2>
-        <h5>Email</h5>
-        @error('email')
-        <div class="invalid-feedback" style="color:red;">
-            {{ $message }}
-        </div>
-        @enderror
-   		<div class="input-div one">
-   		   <div class="i">
-   		   		<i class="fas fa-user"></i>
-   		   </div>
-         <div class="div">
-            <input type="email" name="email" class="input @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Masukan email">
-   		   </div>
-   		</div>
-        <h5>Password</h5>
-   		<div class="input-div one">
-   		   <div class="i"> 
-   		    	<i class="fas fa-lock"></i>
-   		   </div>
-   		   <div class="div">
-   		    	<input type="password" name="password" class="input @error('password') is-invalid @enderror" placeholder="Masukkan password">
-    	   </div>
-    	</div>
-    	<input type="submit" name="Submit" class="btn" value="Login">
-    </form>
-</div>
+    <section class="material-half-bg">
+        <div class="cover"></div>
+    </section>
+    <section class="login-content">
+      <div class="logo text-center">
+        <h1>{{env('APP_NAME')}}</h1>
+      </div>
+      <div class="login-box">
+        @if(!empty($alertMessage)) 
+          <div class="alert alert-danger">
+            {{$alertMessage}}
+          </div>
+        @endif
+
+        <form class="login-form" action="<?= route('custom.login') ?>" method="POST">
+		@csrf
+          <h3 class="login-head"><i class="bi bi-person me-2"></i>SIGN IN</h3>
+          <div class="mb-3">
+            <label class="form-label">USERNAME</label>
+            <input
+              type="text"
+              name="email"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">PASSWORD</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <div class="utility">
+            </div>
+          </div>
+          <div class="mb-3 btn-container d-grid">
+            <Button class="btn btn-primary btn-block"><i class="bi bi-box-arrow-in-right me-2 fs-5"></i>SIGN
+              IN</Button>
+          </div>
+        </form>
+      </div>
+    </section>
 @endsection

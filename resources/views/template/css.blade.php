@@ -1,19 +1,12 @@
+    
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome-free-6/css/all.css') }}">
-    <!-- plugin css -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/@mdi/font/css/materialdesignicons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}">
-    <!-- end plugin css -->
-    <!-- Select 2 plugin -->
-    <link href="{{ asset('assets/select2/select2.min.css') }}" rel="stylesheet" />
-    <!-- common css -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <!-- end common css -->
+    <link rel="stylesheet" href="{{ asset( 'static/assets/bower_components/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset( 'static/assets/bower_components/font-awesome-free-6/css/all.css')}}">
+    <link rel="stylesheet" href="{{ asset( 'static/assets/bootstrap-icons/font/bootstrap-icons.css')}}">
     <!-- SweetAlert 2 -->
-    <script src="{{ asset('assets/dist/sweetalert2/sweetalert2.all.min.js') }}">
+    <script src="{{ asset( 'static/assets/dist/sweetalert2/sweetalert2.all.min.js')}}">
     </script>
-    <link rel="{{ asset('assets/dist/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="{{ asset( 'static/assets/dist/sweetalert2/sweetalert2.min.css')}}">
     <style>
         .form-control-2 {
             display: block;

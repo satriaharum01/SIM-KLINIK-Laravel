@@ -14,7 +14,7 @@ class Appointments extends Model
 
     public function cari_pasien()
     {
-        return $this->belongsTo('App\Models\Patitents', 'patient_id', 'id')->withDefault([
+        return $this->belongsTo('App\Models\Patients', 'patient_id', 'id')->withDefault([
             'name' => null,
             'address' => null,
             'phone_number' => null,

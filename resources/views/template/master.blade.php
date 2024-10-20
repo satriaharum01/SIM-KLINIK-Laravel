@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{{env('APP_NAME')}} | {{$title}}</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- CSRF Token -->
-  <link rel="shortcut icon" href="{{ asset('assets/img/logo.png') }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{env('APP_NAME')}} | {{$title}}</title>
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="{{asset('static/assets/img/logo.png')}}" type="image/gif" />
 
-  <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" >
-  <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{asset('assets/css/toastr.min.css')}}">
-
-  <!-- plugin css -->
-  <link rel="stylesheet" href="{{ asset('assets/dist/sweetalert2/sweetalert2.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/plugins/@mdi/font/css/materialdesignicons.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <!-- Fonts and icons -->
+    <script src="{{asset('static/assets/js/plugin/webfont/webfont.min.js')}}"></script>
+    <script>
+        WebFont.load({
+            google: { "families": ["Lato:300,400,700,900"] },
+            custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['{{asset("static/assets/css/fonts.min.css")}}'] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- CSS Files -->
+    
+    <link rel="stylesheet" type="text/css" href="{{asset('static/css/main.css')}}">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+ 
   <!-- end plugin css -->
 
   @include('template.css')
 </head>
-<body data-base-url="{{url('/')}}">
-
-  <div class="container-scroller" id="app">
+<body class="app sidebar-mini">
+    <!-- Header -->
     @include('template.header')
-    <div class="container-fluid page-body-wrapper">
-      @include('template.sidebar')
-      <div class="main-panel">
-        <div class="content-wrapper">
-          @yield('content')
-        </div>
-        @include('template.footer')
-      </div>
-    </div>
-  </div>
+    <!-- Header -->
 
+    <!-- Sidebar -->
+    @include('template.sidebar')
+    <!-- Sidebar -->
+    
+    <!-- Content -->
+    <main class="app-content">
+      @yield('content')
+
+      @include('template.footer')
+    </main>
+    <!-- Content -->
+    @yield('modal')
     <!-- Password Modal-->
     <div class="modal fade" id="gantiPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -86,22 +96,6 @@
             </div>
         </div>
     </div>
-  <!-- base js -->
-  <script src="{{asset('js/app.js')}}"></script>
-  <script src="{{asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
-  <!-- end base js -->
-
-  <!-- plugin js -->
-  @yield('plugin-scripts')
-  <!-- end plugin js -->
-
-  <!-- common js -->
-  <script src="{{asset('assets/js/off-canvas.js')}}"></script>
-  <script src="{{asset('assets/js/hoverable-collapse.js')}}"></script>
-  <script src="{{asset('assets/js/misc.js')}}"></script>
-  <script src="{{asset('assets/js/settings.js')}}"></script>
-  <script src="{{asset('assets/js/todolist.js')}}"></script>
-  <!-- end common js -->
   @include('template.js')
   @yield('custom_script')
 </body>
