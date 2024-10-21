@@ -10,6 +10,8 @@
       <ul class="app-menu">
         <li><a class="app-menu__item {{ (request()->is('admin/dashboard')) ? 'active' : '' }}" href="{{ route ('admin.dashboard') }}"><i class="app-menu__icon bi bi-speedometer"></i><span class="app-menu__label">Dashboard</span></a></li>
         <li><a class="app-menu__item {{ (request()->is('admin/appointment')) ? 'active' : '' }}" href="{{ route ('admin.appointment') }}"><i class="app-menu__icon bi bi-calendar"></i><span class="app-menu__label">Appointment</span></a></li>
+        <li><a class="app-menu__item {{ (request()->is('admin/dokter')) ? 'active' : '' }}" href="{{ route ('admin.dokter') }}"><i class="app-menu__icon bi bi-person-fill-add"></i><span class="app-menu__label">Dokter</span></a></li>
+        <li><a class="app-menu__item {{ (request()->is('admin/pasien')) ? 'active' : '' }}" href="{{ route ('admin.pasien') }}"><i class="app-menu__icon bi bi-people"></i><span class="app-menu__label">Pasien</span></a></li>
         <!-- Disabled /->
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon bi bi-laptop"></i><span class="app-menu__label">UI Elements</span><i class="treeview-indicator bi bi-chevron-right"></i></a>
           <ul class="treeview-menu">

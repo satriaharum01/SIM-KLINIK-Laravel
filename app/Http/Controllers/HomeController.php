@@ -43,4 +43,26 @@ class HomeController extends Controller
         return view('auth/login', $this->data);
     }
 
+    public function get_doctors()
+    {
+        $data = Doctors::select('*')
+                ->orderby('name', 'ASC')
+                ->get();
+
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+    }
+
+    public function get_patients()
+    {
+        $data = Patients::select('*')
+                ->orderby('name', 'ASC')
+                ->get();
+
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+    }
+
 }

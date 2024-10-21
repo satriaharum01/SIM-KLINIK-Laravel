@@ -24,10 +24,9 @@
             <thead>
               <tr>
                 <th style="text-align: center" width="10%">No</th>
-                <th>Waktu</th>
-                <th>Pasien</th>
-                <th>Dokter</th>
-                <th>Status</th>
+                <th>Nama</th>
+                <th>Spesialist</th>
+                <th>Telepon</th>
                 <th style="text-align: center" width="20%">Aksi</th>
               </tr>
             </thead>
@@ -54,49 +53,21 @@
               @csrf
               <div class="modal-body">
                   <div class="form-group row mb-2">
-                      <label class="col-sm-4">Pasien</label>
-                      <div class="col-sm-6">
-                        <select name="patient_id" id="patient_id" class="form-control" required>
-                          <option value="0" selected disabled hidden>-- Pilih</option>
-                        </select>
-                      </div>
-                      <button type="button" class="btn btn-primary col-md-1" data-bs-target="#data-modal-pasien" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="bi bi-search"></i> </button>
-                  </div>
-                  <div class="form-group row mb-2">
-                      <label class="col-sm-4">Dokter</label>
+                      <label class="col-sm-4">Nama Dokter</label>
                       <div class="col-sm-8">
-                        <select name="doctor_id" id="doctor_id" class="form-control" required>
-                          <option value="0" selected disabled >-- Pilih</option>
-                        </select>
+                        <input type="text" name="name" class="form-control">
                       </div>
                   </div>
                   <div class="form-group row mb-2">
-                      <label class="col-sm-4">Tanggal</label>
+                      <label class="col-sm-4">Spesialist</label>
                       <div class="col-sm-8">
-                        <input type="date" name="appointment_date" class="form-control">
+                        <input type="text" name="specialization" class="form-control">
                       </div>
                   </div>
                   <div class="form-group row mb-2">
-                      <label class="col-sm-4">Waktu</label>
+                      <label class="col-sm-4">Telepon</label>
                       <div class="col-sm-8">
-                        <input type="time" name="appointment_time" class="form-control">
-                      </div>
-                  </div>
-                  <div class="form-group row mb-2">
-                      <label class="col-sm-4">Status</label>
-                      <div class="col-sm-8">
-                        <select name="status" class="form-control" required>
-                          <option value="0" selected disabled>-- Pilih</option>
-                          <option value="Pending">Pending</option>
-                          <option value="Completed">Completed</option>
-                          <option value="Canceled">Canceled</option>
-                        </select>
-                      </div>
-                  </div>
-                  <div class="form-group row mb-2">
-                      <label class="col-sm-4">Catatan</label>
-                      <div class="col-sm-8">
-                        <textarea name="notes" class="form-control"></textarea>
+                        <input type="number" name="phone_number" class="form-control">
                       </div>
                   </div>
               </div>
@@ -109,57 +80,25 @@
   </div>
 </div>
 <!--- END MODAL DATA --->
-@include('template.modal.pasien')
 @endsection
 @section('custom_script')
 <script>
-  let dokter;
-  let pasien;
+  
   function find_data(id){
       $.ajax({
-            url: '{{ url("$page") }}/find/'+id,
-            type: "GET",
-            cache: false,
-            dataType: 'json',
-            success: function (dataResult) { 
-                console.log(dataResult);
-                set_value(dataResult);
-                console.log('Edit Data :', dataResult);
-            }
-        });
-  }
-  function get_dokter(){
-    $.ajax({
-          url: '{{ url("get/data/dokter") }}',
+          url: '{{ url("$page") }}/find/'+id,
           type: "GET",
           cache: false,
           dataType: 'json',
           success: function (dataResult) { 
-              var binding = dataResult.data;
-              $.each(binding, function(index, row) {
-                  $('#doctor_id').append('<option  value="' + row.id + '">' + row.name + ' </option>');
-              })
+              console.log(dataResult);
+              set_value(dataResult);
+              console.log('Edit Data :', dataResult);
           }
-    });
+      });
   }
-  
-  function get_pasien(){
-    $.ajax({
-          url: '{{ url("get/data/pasien") }}',
-          type: "GET",
-          cache: false,
-          dataType: 'json',
-          success: function (dataResult) { 
-              var binding = dataResult.data;
-              $.each(binding, function(index, row) {
-                  $('#patient_id').append('<option hidden value="' + row.id + '">' + row.name + ' </option>');
-              })
-          }
-    });
-  }
+
   $(function () {
-    get_dokter();
-    get_pasien();
 
     table = $("#data-width").DataTable({
       searching: false,
@@ -171,19 +110,15 @@
           className: "text-center",
         },
         {
-          data: "waktu",
+          data: "name",
           className: "text-center",
         },
         {
-          data: "pasien",
+          data: "specialization",
           className: "text-center",
         },
         {
-          data: "dokter",
-          className: "text-center",
-        },
-        {
-          data: "status",
+          data: "phone_number",
           className: "text-center",
         },
         {
@@ -227,29 +162,16 @@
   });
 
   function kosongkan() {
-    jQuery("#compose-form select[name=patient_id]").val(0);
-    jQuery("#compose-form select[name=doctor_id]").val(0);
-    jQuery("#compose-form input[name=appointment_date]").val("");
-    jQuery("#compose-form input[name=appointment_time]").val("");
-    jQuery("#compose-form select[name=status]").val(0);
-    jQuery("#compose-form textarea[name=notes]").val("");
+    jQuery("#compose-form input[name=name]").val("");
+    jQuery("#compose-form input[name=specialization]").val("");
+    jQuery("#compose-form input[name=phone_number]").val("");
   }
   
   function set_value(value) {
-    jQuery("#compose-form select[name=patient_id]").val(value.patient_id);
-    jQuery("#compose-form select[name=doctor_id]").val(value.doctor_id);
-    jQuery("#compose-form input[name=appointment_date]").val(value.appointment_date);
-    jQuery("#compose-form input[name=appointment_time]").val(value.appointment_time);
-    jQuery("#compose-form select[name=status]").val(value.status);
-    jQuery("#compose-form textarea[name=notes]").val(value.notes);
+    jQuery("#compose-form input[name=name]").val(value.name);
+    jQuery("#compose-form input[name=specialization]").val(value.specialization);
+    jQuery("#compose-form input[name=phone_number]").val(value.phone_number);
   }
   
-  $("body").on("click", ".btn-pilih", function () {
-    var Id = jQuery(this).attr("data-id");
-    jQuery("#compose-form select[name=patient_id]").val(Id);
-    jQuery("#data-modal-pasien").modal("hide");
-    jQuery("#compose").modal("toggle");
-  });
 </script>
-@include('template.modal.pasienjs')
 @endsection

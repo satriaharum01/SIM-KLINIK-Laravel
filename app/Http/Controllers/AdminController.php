@@ -48,6 +48,27 @@ class AdminController extends Controller
         return view($this->view, $this->data);
     }
 
+    public function doctors()
+    {
+        $this->data['title'] = 'Data Dokter';
+        $this->data[ 'link' ] = '/admin/dokter';
+        $this->data['page'] = 'admin/dokter';
+        $this->view = 'admin/dokter/index';
+        return view($this->view, $this->data);
+    }
+    
+    public function patients()
+    {
+        $this->data['title'] = 'Data Pasien';
+        $this->data[ 'link' ] = '/admin/pasien';
+        $this->data['page'] = 'admin/pasien';
+        $this->view = 'admin/pasien/index';
+        return view($this->view, $this->data);
+    }
+
+
+
+    //GRAPH
     public function graph_area()
     {
         $out = array();

@@ -22,10 +22,10 @@ class AppointmentController extends Controller
 
     public function destroy($id)
     {
-        $rows = User::findOrFail($id);
+        $rows = Appointments::findOrFail($id);
         $rows->delete();
-        return redirect($this->page);
 
+        return redirect($this->page);
     }
 
     public function update(Request $request, $id)
@@ -33,9 +33,12 @@ class AppointmentController extends Controller
         $rows = Appointments::find($id);
 
         $rows->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'level' => $request->level,
+            'patient_id' => $request->patient_id,
+            'doctor_id' => $request->doctor_id,
+            'appointment_date' => $request->appointment_date,
+            'appointment_time' => $request->appointment_time,
+            'status' => $request->status,
+            'notes' => $request->notes,
             'update_at' => now()
          ]);
 
@@ -47,12 +50,15 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         Appointments::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'level' => $request->level
+            'patient_id' => $request->patient_id,
+            'doctor_id' => $request->doctor_id,
+            'appointment_date' => $request->appointment_date,
+            'appointment_time' => $request->appointment_time,
+            'status' => $request->status,
+            'notes' => $request->notes
         ]);
-        return redirect($this->page);
 
+        return redirect($this->page);
     }
 
     public function json()
@@ -62,9 +68,8 @@ class AppointmentController extends Controller
                 ->orderby('appointment_time', 'DESC')
                 ->get();
 
-        foreach($data as $row)
-        {
-            $row->waktu = date('d F Y',strtotime($row->appointment_date)) . $row->appointment_time;
+        foreach ($data as $row) {
+            $row->waktu = date('d F Y', strtotime($row->appointment_date)) .' '. date('h:i A', strtotime($row->appointment_time));
             $row->pasien = $row->cari_pasien->name;
             $row->dokter = $row->cari_dokter->name;
         }
@@ -76,9 +81,9 @@ class AppointmentController extends Controller
 
     public function find($id)
     {
-        $data = User::select('*')->where('id', $id)->get();
+        $data = Appointments::select('*')->where('id', $id)->first();
 
-        return json_encode(array('data' => $data));
+        return json_encode($data);
     }
 
 }

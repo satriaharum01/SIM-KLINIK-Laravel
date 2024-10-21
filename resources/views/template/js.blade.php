@@ -120,10 +120,20 @@
             });
 
         })
-        
+        function fetch_data(category, binding){
+          $.ajax({
+                url: '{{ url("get/data") }}/'+category,
+                type: "GET",
+                cache: false,
+                dataType: 'json',
+                success: function (dataResult) { 
+                    binding = dataResult;
+                }
+          });
+        }
     </script>
   
-  @if(Auth::user()->level == 'Admin')
+  @if(Auth::user()->level == '')
     <script type="text/javascript">
         var count_notif = 0;
         var current_notif = 1;
@@ -183,5 +193,5 @@
             });
             setTimeout('get_notif()', 5000);
         }
-    </script>
+      </script>
     @endif
