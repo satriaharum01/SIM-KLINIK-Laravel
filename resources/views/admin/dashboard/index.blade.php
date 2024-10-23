@@ -17,17 +17,17 @@
     <div class="widget-small primary coloured-icon">
       <i class="icon bi bi-people fs-1"></i>
       <div class="info">
-        <h4>Users</h4>
-        <p><b>1</b></p>
+        <h4>Pasien</h4>
+        <p><b>{{$c_patients}}</b></p>
       </div>
     </div>
   </div>
   <div class="col-md-6 col-lg-3">
     <div class="widget-small info coloured-icon">
-      <i class="icon bi bi-database fs-1"></i>
+      <i class="icon bi bi-person-fill-add fs-1"></i>
       <div class="info">
-        <h4>Data</h4>
-        <p><b>0</b></p>
+        <h4>Dokter</h4>
+        <p><b>{{$c_doctors}}</b></p>
       </div>
     </div>
   </div>
@@ -35,17 +35,17 @@
     <div class="widget-small warning coloured-icon">
       <i class="icon bi bi-graph-up-arrow fs-1"></i>
       <div class="info">
-        <h4>Permintaan Terakhir</h4>
-        <p><b>0</b></p>
+        <h4>Appointment</h4>
+        <p><b>{{$c_appointments}}</b></p>
       </div>
     </div>
   </div>
   <div class="col-md-6 col-lg-3">
     <div class="widget-small danger coloured-icon">
-      <i class="icon bi bi-graph-up-arrow fs-1"></i>
+      <i class="icon bi bi-cash fs-1"></i>
       <div class="info">
-        <h4>Ekspor Terakhir</h4>
-        <p><b>0</b></p>
+        <h4>Payment</h4>
+        <p><b>Rp. {{$c_payments}}</b></p>
       </div>
     </div>
   </div>

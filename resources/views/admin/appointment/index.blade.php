@@ -160,7 +160,7 @@
   $(function () {
     get_dokter();
     get_pasien();
-
+    let cls;
     table = $("#data-width").DataTable({
       searching: false,
       ajax: '{{ url("$page/json") }}',
@@ -184,7 +184,17 @@
         },
         {
           data: "status",
-          className: "text-center",
+          className: "text-center",render: function(data){
+            if(data === 'Completed')
+            {
+              cls = 'btn-primary';
+            }else if(data === 'Canceled'){
+              cls = 'btn-danger';
+            }else{
+              cls = 'btn-warning';
+            }
+          return '<button type="button" class="btn '+cls+'">'+data+'</button>'
+          }
         },
         {
           data: "id",

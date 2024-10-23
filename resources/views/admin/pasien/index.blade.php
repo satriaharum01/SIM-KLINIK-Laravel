@@ -13,11 +13,6 @@
 <div class="row">
   <div class="col-md-12">
     <div class="tile">
-      <div class="border-bottom d-flex justify-content-end mb-3 pb-2 tile-body">
-        <button type="button" class="btn btn-primary btn-add pull-right">
-          <i class="fa fa-plus"></i> Tambah Data
-        </button>
-      </div>
       <div class="tile-body">
         <div class="table-responsive">
           <table class="table table-hover table-bordered" id="data-width" width="100%">
@@ -117,7 +112,7 @@
   $(function () {
 
     table = $("#data-width").DataTable({
-      searching: false,
+      searching: true,
       ajax: '{{ url("$page/json") }}',
       columns: [
         {

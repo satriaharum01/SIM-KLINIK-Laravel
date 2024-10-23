@@ -12,9 +12,9 @@ class Prescriptions extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['appointment_id','medication','dosage','instructions'];
 
-    public function cari_appoitment()
+    public function cari_appointment()
     {
-        return $this->belongsTo('App\Models\Appointment', 'appointment_id', 'id')->withDefault([
+        return $this->belongsTo('App\Models\Appointments', 'appointment_id', 'id')->withDefault([
             'patient_id'  => '0',
             'doctor_id'  => '0',
             'appointment_date'  => null,

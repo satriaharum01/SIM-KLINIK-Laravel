@@ -1,6 +1,7 @@
 
 <script>
   $(function () {
+    let pasien_name;
   const table_pasien = $("#data-pasien").DataTable({
       searching: true,
       ajax: '{{ url("get/data/pasien") }}',
@@ -15,6 +16,10 @@
             data: "name",
             className: "text-center",
             sortable: true,
+            render: function (data) {
+              pasien_name = data;
+              return data;
+            }
         },
         {
             name: "Gender",
@@ -46,7 +51,7 @@
             className: "text-center",
             sortable: true,
             render: function (data) {
-                return '<button class="btn btn-success btn-pilih" data-id="' + data + '" > <i class="bi bi-check"></i> Pilih</button>';
+                return '<button class="btn btn-success btn-pilih" data-pasien="'+pasien_name+'" data-id="' + data + '" > <i class="bi bi-check"></i> Pilih</button>';
             },
         },
       ],

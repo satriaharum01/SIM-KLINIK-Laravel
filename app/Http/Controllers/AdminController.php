@@ -35,6 +35,11 @@ class AdminController extends Controller
     public function index()
     {
         $this->data['title'] = 'Dashboard Admin';
+        $this->data['c_patients'] = $this->count_patients();
+        $this->data['c_doctors'] = $this->count_doctors();
+        $this->data['c_appointments'] = $this->count_appointments();
+        $this->data['c_payments'] = $this->count_payments();
+
         $this->data['chart'] = $this->graph_area();
         return view('admin/dashboard/index', $this->data);
     }
@@ -48,6 +53,15 @@ class AdminController extends Controller
         return view($this->view, $this->data);
     }
 
+    public function billing()
+    {
+        $this->data['title'] = 'Data Pembayaran';
+        $this->data[ 'link' ] = '/admin/billing';
+        $this->data['page'] = 'admin/billing';
+        $this->view = 'admin/billing/index';
+        return view($this->view, $this->data);
+    }
+
     public function doctors()
     {
         $this->data['title'] = 'Data Dokter';
@@ -56,7 +70,7 @@ class AdminController extends Controller
         $this->view = 'admin/dokter/index';
         return view($this->view, $this->data);
     }
-    
+
     public function patients()
     {
         $this->data['title'] = 'Data Pasien';
@@ -66,7 +80,34 @@ class AdminController extends Controller
         return view($this->view, $this->data);
     }
 
+    //COUNTERS
+    public function count_patients()
+    {
+        $data = Patients::select('*')->count();
 
+        return $data;
+    }
+
+    public function count_doctors()
+    {
+        $data = Doctors::select('*')->count();
+
+        return $data;
+    }
+
+    public function count_appointments()
+    {
+        $data = Appointments::select('*')->count();
+
+        return $data;
+    }
+
+    public function count_payments()
+    {
+        $data = Billing::select('*')->where('payment_status', 'Paid')->sum('total_amount');
+
+        return number_format($data, 0);
+    }
 
     //GRAPH
     public function graph_area()

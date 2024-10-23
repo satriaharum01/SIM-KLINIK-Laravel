@@ -33,8 +33,7 @@ class HomeController extends Controller
     */
     public function index()
     {
-        $this->data['chart'] = $this->graph_area();
-        return view('admin/dashboard/index', $this->data);
+        return view('landing/index', $this->data);
     }
 
     public function login()
@@ -65,4 +64,61 @@ class HomeController extends Controller
             ->make(true);
     }
 
+    public function get_appointments()
+    {
+        $data = Appointments::select('*')
+        ->orderby('appointment_date', 'DESC')
+        ->orderby('appointment_time', 'DESC')
+        ->get();
+
+        foreach ($data as $row) {
+            $row->waktu = date('d F Y', strtotime($row->appointment_date)) .' '. date('h:i A', strtotime($row->appointment_time));
+            $row->kode = date('Ymd', strtotime($row->appointment_date)).'APPR'.$row->id;
+            $row->dokter = $row->cari_dokter->name;
+            $row->pasien = $row->cari_pasien->name;
+        }
+
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+    }
+
+    public function get_patients_appointments($id)
+    {
+        $data = Appointments::select('*')
+        ->where('patient_id', $id)
+        ->orderby('appointment_date', 'DESC')
+        ->orderby('appointment_time', 'DESC')
+        ->get();
+
+        foreach ($data as $row) {
+            $row->waktu = date('d F Y', strtotime($row->appointment_date)) .' '. date('h:i A', strtotime($row->appointment_time));
+            $row->kode = date('Ymd', strtotime($row->appointment_date)).'APPR'.$row->appointment_id;
+            $row->dokter = $row->cari_dokter->name;
+        }
+
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+    }
+
+    public function get_doctor_appointments()
+    {
+        $doctor = Doctors::select('id')->where('user_id', Auth::user()->id)->first();
+        $data = Appointments::select('*')
+        ->where('doctor_id', $doctor->id)
+        ->orderby('appointment_date', 'DESC')
+        ->orderby('appointment_time', 'DESC')
+        ->get();
+
+        foreach ($data as $row) {
+            $row->waktu = date('d F Y', strtotime($row->appointment_date)) .' '. date('h:i A', strtotime($row->appointment_time));
+            $row->kode = date('Ymd', strtotime($row->appointment_date)).'APPR'.$row->appointment_id;
+            $row->pasien = $row->cari_pasien->name;
+        }
+
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+    }
 }

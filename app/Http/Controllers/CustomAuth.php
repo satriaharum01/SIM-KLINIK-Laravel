@@ -25,16 +25,21 @@ class CustomAuth extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $rows = User::find(Auth::user()->id);
+            $level = strtolower( $rows->level);
             $rows->update([
                 'last_login' => now()
              ]);
-            return redirect()->intended('/admin/dashboard')
+            return redirect()->intended('/'.$level.'/dashboard')
                         ->withSuccess('Signed in');
         }
 
         return redirect(route('login'))->withErrors(['alertMessage' => 'Email atau Password Salah']);
     }
-
+    public function customlogout()
+    {
+        Auth::logout();
+        return redirect(route('login'));
+    }
     public function set_password(Request $request)
     {
         $data = [

@@ -7,7 +7,7 @@ use AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 
-class IsPimpinan
+class IsDokter
 {
     /**
      * Handle an incoming request.
@@ -20,10 +20,10 @@ class IsPimpinan
 
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->level == "Pimpinan") {
+        if (auth()->user()->level == "Dokter") {
             return $next($request);
         }
 
-        return redirect('/admin/dashboard');
+        return redirect('/pasien/dashboard');
     }
 }

@@ -101,7 +101,7 @@
   $(function () {
 
     table = $("#data-width").DataTable({
-      searching: false,
+      searching: true,
       ajax: '{{ url("$page/json") }}',
       columns: [
         {

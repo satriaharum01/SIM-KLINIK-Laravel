@@ -118,7 +118,56 @@
                     document.getElementById('delete-form-' + xy).submit();
                 }
             });
-
+        })
+        $("body").on("click", ".btn-reject", function() {
+            var x = jQuery(this).attr("data-id");
+            var y = jQuery(this).attr("data-handler");
+            var xy = x + '-' + y;
+            event.preventDefault()
+            Swal.fire({
+                title: 'Tolak Appointment ?',
+                text: "Hubungi admin untuk perubahan data lebih lanjut !",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire(
+                        'Appointment Ditolak!',
+                        '',
+                        'success'
+                    );
+                    document.getElementById('reject-form-' + xy).submit();
+                }
+            });
+        })
+        $("body").on("click", ".btn-confirm", function() {
+            var x = jQuery(this).attr("data-id");
+            var y = jQuery(this).attr("data-handler");
+            var xy = x + '-' + y;
+            event.preventDefault()
+            Swal.fire({
+                title: 'Selesaikan Appointment ?',
+                text: "Hubungi admin untuk perubahan data lebih lanjut !",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire(
+                        'Appointment Diterima!',
+                        '',
+                        'success'
+                    );
+                    document.getElementById('confirm-form-' + xy).submit();
+                }
+            });
         })
         function fetch_data(category, binding){
           $.ajax({

@@ -7,7 +7,7 @@ use AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 
-class IsPegawai
+class IsStaff
 {
     /**
      * Handle an incoming request.
