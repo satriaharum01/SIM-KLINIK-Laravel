@@ -14,9 +14,11 @@ class Doctors extends Model
 
     public function cari_user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id', 'id')->withDefault([
-            'name' => null,
-            'email' => null
-        ]);
+        return $this->belongsTo('App\Models\User', 'user_id', 'id')->withDefault(function ($data) {
+            if (collect($data->getFillable())->every(fn($attr) => $data->$attr === null)) {
+                return null;
+            }
+            return $data;
+        });
     }
 }
